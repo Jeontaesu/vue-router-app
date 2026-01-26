@@ -1,9 +1,10 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
-import { createPinia } from "pinia";
 
 const app = createApp(App);
-app.use(router);
-app.use(createPinia());
+
+app.use(router); // Vue Router 등록
+app.use(createPinia()); // Pinia 등록
 app.mount("#app");
