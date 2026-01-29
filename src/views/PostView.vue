@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <h2>📰 게시글 상세</h2>
-    <p><strong>게시글 ID:</strong> {{ postId }}</p>
-    <p><strong>작성자:</strong> {{ writer }}</p>
+  <div v-if="post">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <router-link to="/">← 목록으로</router-link>
+  </div>
+  <div v-else>
+    <p>게시글을 찾을 수 없습니다.</p>
+    <router-link to="/">← 홈으로</router-link>
   </div>
 </template>
 
 <script setup>
 import { useRoute } from "vue-router";
+import { usePostStore } from "@/stores/posts";
 
-// 라우트 객체 가져오기
 const route = useRoute();
-
-// 파라미터 추출
-const postId = route.params.id;
-const writer = route.query.writer || "익명";
+const store = usePostStore();
+const post = store.getPostById(route.params.id);
 </script>
